@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mvc_weather_app/src/model/city.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'city-details-view.dart';
+
 class CityView extends StatefulWidget {
   final City _city;
 
@@ -16,7 +18,6 @@ class CityView extends StatefulWidget {
 }
 
 class CityState extends State<CityView> {
-  
   City _city;
 
   CityState(this._city);
@@ -31,13 +32,13 @@ class CityState extends State<CityView> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                leading: Icon(
-                  Icons.cloud,
-                  color: Colors.orange,
-                ),
-                title: Text('${_city.name}\n'),
-                subtitle: Text('${_city.weather[0].description} \nTemparature: ${_city.main.temp} \u2103')
-                ),
+                  leading: Icon(
+                    Icons.cloud,
+                    color: Colors.orange,
+                  ),
+                  title: Text('${_city.name}\n'),
+                  subtitle: Text(
+                      '${_city.weather[0].description} \nTemparature: ${_city.main.temp} \u2103')),
               ButtonTheme.bar(
                   child: ButtonBar(
                 children: <Widget>[
@@ -64,6 +65,6 @@ class CityState extends State<CityView> {
   }
 
   void viewCityDetails() {
-    Navigator.pushNamed(context, '/citydetails');
+    Navigator.pushNamed(context, CityDetailsView.route_name, arguments: _city);
   }
 }

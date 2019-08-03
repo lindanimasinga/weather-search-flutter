@@ -9,14 +9,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Weather App Search',
-        theme: ThemeData(
-          primarySwatch: Colors.orange,
+        theme: ThemeData.light().copyWith(
+            primaryColor: Colors.orange,
+            accentColor: Colors.orange,
+            buttonColor: Colors.orange,
+            floatingActionButtonTheme: FloatingActionButtonThemeData().copyWith(
+              backgroundColor: Colors.orange
+            )
         ),
         initialRoute: '/',
         routes: {
           '/': (context) => SearchView(title: 'Weather Search'),
-          '/citydetails': (context) => CityDetailsView(),
+          CityDetailsView.route_name: (context) => CityDetailsView(),
         });
   }
 }

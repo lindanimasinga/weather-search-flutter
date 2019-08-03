@@ -11,6 +11,8 @@
         android:label="flutter_mvc_weather_app"
         android:icon="@mipmap/ic_launcher">
 
+        <uses-permission android:name="android.permission.CAMERA" />
+        
         <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyB6j17UvvYy5I3MrI1_jviMFdWu191uIcs"/>
 
@@ -33,5 +35,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name="com.apptreesoftware.barcodescan.BarcodeScannerActivity"/>
     </application>
 </manifest>

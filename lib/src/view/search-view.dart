@@ -1,6 +1,10 @@
+import 'dart:developer';
+
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mvc_weather_app/src/model/city.dart';
 import 'package:flutter_mvc_weather_app/src/service/weather-service.dart';
+import 'package:flutter_mvc_weather_app/src/view/city-details-view.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'city-view.dart';
 
@@ -64,6 +68,12 @@ class _SearchViewState extends State<SearchView> {
               ))),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.camera_alt,
+        ),
+        onPressed: openBarCodeScan,
+      ),
     );
   }
 
@@ -81,5 +91,16 @@ class _SearchViewState extends State<SearchView> {
 
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
+  }
+
+  void openBarCodeScan() {
+    BarcodeScanner.scan().asStream()
+    .listen((barcode) {
+      WeatherService.fetchCurrentWeather(barcode).listen((city) {
+            log(city.name);
+            Navigator.pushNamed(context, CityDetailsView.route_name, arguments: city);
+          }
+        );
+    });
   }
 }
